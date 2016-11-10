@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    protected $table='admin_permisstions';
+    protected $table='admin_permissions';
     //
 }
