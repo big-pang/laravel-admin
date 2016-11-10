@@ -182,6 +182,7 @@ return [
         //第三方
 
         Barryvdh\Debugbar\ServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
     ],
 

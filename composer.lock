@@ -4,9 +4,131 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2a92a40cc27b8c4244f48ac297e18841",
-    "content-hash": "6d03ff14f2d83b23557bb6809702da36",
+    "hash": "f4d188f09d937af33a572661fc6f421c",
+    "content-hash": "29e14964fc3ae161a213ca4184a38a8c",
     "packages": [
+        {
+            "name": "arcanedev/log-viewer",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ARCANEDEV/LogViewer.git",
+                "reference": "d72efb0ff2dec5d7b3b04542b69bc5bb1defccd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/ARCANEDEV/LogViewer/d72efb0ff2dec5d7b3b04542b69bc5bb1defccd7.zip",
+                "reference": "d72efb0ff2dec5d7b3b04542b69bc5bb1defccd7",
+                "shasum": ""
+            },
+            "require": {
+                "arcanedev/support": "~3.0",
+                "php": ">=5.6",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpcov": "~2.0|~3.0",
+                "phpunit/phpunit": "~4.0|~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Arcanedev\\LogViewer\\": "src/"
+                },
+                "files": [
+                    "constants.php",
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ARCANEDEV",
+                    "email": "arcanedev.maroc@gmail.com",
+                    "homepage": "https://github.com/arcanedev-maroc",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides a Log Viewer for Laravel 5",
+            "homepage": "https://github.com/ARCANEDEV/LogViewer",
+            "keywords": [
+                "arcanedev",
+                "arcanesoft",
+                "laravel",
+                "log",
+                "log viewer",
+                "log-viewer",
+                "logviewer"
+            ],
+            "time": "2016-11-08 10:46:48"
+        },
+        {
+            "name": "arcanedev/support",
+            "version": "3.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ARCANEDEV/Support.git",
+                "reference": "66025237c080667a9ce3b5effbf91315c9bcf7f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/ARCANEDEV/Support/66025237c080667a9ce3b5effbf91315c9bcf7f3.zip",
+                "reference": "66025237c080667a9ce3b5effbf91315c9bcf7f3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpcov": "~2.0|~3.0",
+                "phpunit/phpunit": "~4.0|~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Arcanedev\\Support\\": "src/"
+                },
+                "files": [
+                    "constants.php",
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ARCANEDEV",
+                    "email": "arcanedev.maroc@gmail.com",
+                    "homepage": "https://github.com/arcanedev-maroc"
+                }
+            ],
+            "description": "ARCANEDEV Support Helpers",
+            "homepage": "https://github.com/ARCANEDEV/Support",
+            "keywords": [
+                "arcanedev",
+                "arcanesoft",
+                "laravel",
+                "support"
+            ],
+            "time": "2016-10-24 16:13:22"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "v2.3.0",
