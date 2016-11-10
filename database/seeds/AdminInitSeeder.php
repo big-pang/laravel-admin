@@ -37,7 +37,7 @@ SQL
         id = 1;
         $admin->name = 'root';
         $admin->email = 'root@admin.com';
-        $admin->password = encrypt('root');
+        $admin->password = bcrypt('root');
         $admin->save();
     }
 }

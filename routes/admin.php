@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('test',['uses'=>'Admin\IndexController@index']);
+Route::get('test',['uses'=>'IndexController@index']);
 
 Route::get('index',[ 'as'=>'admin.index','uses'=>function(){
     return redirect('/admin/log-viewer');

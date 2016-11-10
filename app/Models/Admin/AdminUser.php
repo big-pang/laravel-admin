@@ -7,5 +7,66 @@ use Illuminate\Database\Eloquent\Model;
 class AdminUser extends Model
 {
     protected $table='admin_users';
-    //
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['username', 'email', 'password'];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
+
+    public function techList(){
+        return $this->belongsTo('App\techList');
+    }
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'admin_role_user','role_id','user_id');
+    }
+
+    // 判断用户是否具有某个角色
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    // 判断用户是否具有某权限
+    public function hasPermission($permission)
+    {
+        if (is_string($permission)) {
+            $permission = Permission::where('name',$permission)->first();
+            if (!$permission) return false;
+        }
+
+        return $this->hasRole($permission->roles);
+    }
+
+    // 给用户分配角色
+    public function assignRole($role)
+    {
+        return $this->roles()->save($role);
+    }
+
+
+    //角色整体添加与修改
+    public function giveRoleTo(array $RoleId){
+        $this->roles()->detach();
+        $roles=Role::whereIn('id',$RoleId)->get();
+        foreach ($roles as $v){
+            $this->assignRole($v);
+        }
+        return true;
+    }
 }
