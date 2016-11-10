@@ -22,11 +22,7 @@ class AdminUser extends Model
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function techList(){
-        return $this->belongsTo('App\techList');
-    }
-
-
+    //用户角色
     public function roles()
     {
         return $this->belongsToMany(Role::class,'admin_role_user','role_id','user_id');
