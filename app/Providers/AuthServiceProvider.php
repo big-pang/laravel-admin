@@ -21,10 +21,20 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Gate $gate)
     {
-        $this->registerPolicies();
-
+        $gate->before(function ($user, $ability) {
+            if ($user->id === 1) {
+                return true;
+            }
+        });
+        $this->registerPolicies($gate);
+        $permissions = \App\Models\Permission::with('roles')->get();
+        foreach ($permissions as $permission) {
+            $gate->define($permission->name, function ($user) use ($permission) {
+                return $user->hasPermission($permission);
+            });
+        }
         //
     }
 }
