@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/index';
+    protected $redirectTo = '/admin';
 
     protected $username;
 
@@ -59,6 +59,23 @@ class LoginController extends Controller
     protected function guard()
     {
         return auth()->guard('admin');
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        $this->guard('admin')->logout();
+
+        request()->session()->flush();
+
+        request()->session()->regenerate();
+
+        return redirect('/admin/login');
     }
 
 

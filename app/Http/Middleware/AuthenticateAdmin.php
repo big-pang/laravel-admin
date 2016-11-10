@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Zizaco\Entrust\EntrustFacade as Entrust;
 use Route,URL,Auth;
 
 class AuthenticateAdmin
@@ -21,7 +20,6 @@ class AuthenticateAdmin
      */
     public function handle($request, Closure $next)
     {
-        //return $next($request);
         if(Auth::guard('admin')->user()->id === 1){
             return $next($request);
         }

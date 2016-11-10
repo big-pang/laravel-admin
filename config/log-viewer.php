@@ -38,8 +38,7 @@ return [
         'attributes' => [
             'prefix'     => 'admin/log-viewer',
 
-            //'middleware' => ['admin','auth','menu'],
-            'middleware' => ['admin'],
+            'middleware' => ['admin','auth:admin','menu'],
         ],
     ],
 

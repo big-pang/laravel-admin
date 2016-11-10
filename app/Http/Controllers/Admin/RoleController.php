@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Permission;
+use App\Models\Admin\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleUpdateRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Role;
+use App\Models\Admin\Role;
 use Log;
 use Auth;
 
@@ -100,7 +100,7 @@ class RoleController extends Controller
         if (is_array($request->get('permissions'))) {
             $role->givePermissionsTo($request->get('permissions'));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Role',$role->id,1,"用户".Auth::user()->username."{".Auth::user()->id."}添加角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".Auth::user()->username."{".Auth::user()->id."}添加角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('添加成功！');
     }
 
@@ -160,7 +160,7 @@ class RoleController extends Controller
         $role->save();
 
         $role->givePermissionsTo($request->get('permissions',[]));
-        event(new \App\Events\userActionEvent('\App\Models\Role',$role->id,3,"用户".Auth::user()->username."{".Auth::user()->id."}编辑角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,3,"用户".Auth::user()->username."{".Auth::user()->id."}编辑角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('修改成功！');
     }
 
@@ -179,7 +179,7 @@ class RoleController extends Controller
             return redirect()->back()
                 ->withErrors("删除失败");
         }
-        event(new \App\Events\userActionEvent('\App\Models\Role',$role->id,2,"用户".Auth::user()->username."{".Auth::user()->id."}删除角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"用户".Auth::user()->username."{".Auth::user()->id."}删除角色".$role->name."{".$role->id."}"));
         return redirect()->back()
             ->withSuccess("删除成功");
     }

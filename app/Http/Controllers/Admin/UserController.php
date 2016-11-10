@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Role;
-use App\Models\AdminUser as User;
+use App\Models\Admin\Role;
+use App\Models\Admin\AdminUser as User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -94,7 +94,7 @@ class UserController extends Controller
         if (is_array($request->get('roles'))) {
             $user->giveRoleTo($request->get('roles'));
         }
-        event(new \App\Events\userActionEvent('\App\Models\User',$user->id,1,'添加了用户'.$user->username));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,1,'添加了用户'.$user->username));
         return redirect('/admin/user')->withSuccess('添加成功！');
     }
 
@@ -131,7 +131,7 @@ class UserController extends Controller
         }
         $data['rolesAll'] = Role::all()->toArray();
         $data['id'] = (int)$id;
-        event(new \App\Events\userActionEvent('\App\Models\User',$user->id,3,'编辑了用户'.$user->username));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,3,'编辑了用户'.$user->username));
         return view('admin.user.edit', $data);
     }
 
