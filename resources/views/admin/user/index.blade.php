@@ -119,7 +119,7 @@
                 },
                 "columns": [
                     {"data": "id"},
-                    {"data": "username"},
+                    {"data": "name"},
                     {"data": "email"},
                     {"data": "created_at"},
                     {"data": "updated_at"},

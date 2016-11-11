@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     protected $fields = [
-        'username' => '',
+        'name' => '',
         'email' => '',
         'roles' => [],
     ];
@@ -35,11 +35,11 @@ class UserController extends Controller
             $data['recordsTotal'] = User::count();
             if (strlen($search['value']) > 0) {
                 $data['recordsFiltered'] = User::where(function ($query) use ($search) {
-                    $query->where('username', 'LIKE', '%' . $search['value'] . '%')
+                    $query->where('name', 'LIKE', '%' . $search['value'] . '%')
                         ->orWhere('email', 'like', '%' . $search['value'] . '%');
                 })->count();
                 $data['data'] = User::where(function ($query) use ($search) {
-                    $query->where('username', 'LIKE', '%' . $search['value'] . '%')
+                    $query->where('name', 'LIKE', '%' . $search['value'] . '%')
                         ->orWhere('email', 'like', '%' . $search['value'] . '%');
                 })
                     ->skip($start)->take($length)
@@ -94,7 +94,7 @@ class UserController extends Controller
         if (is_array($request->get('roles'))) {
             $user->giveRoleTo($request->get('roles'));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,1,'添加了用户'.$user->username));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,1,'添加了用户'.$user->name));
         return redirect('/admin/user')->withSuccess('添加成功！');
     }
 
@@ -131,7 +131,7 @@ class UserController extends Controller
         }
         $data['rolesAll'] = Role::all()->toArray();
         $data['id'] = (int)$id;
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,3,'编辑了用户'.$user->username));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,3,'编辑了用户'.$user->name));
         return view('admin.user.edit', $data);
     }
 
