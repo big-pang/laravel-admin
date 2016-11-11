@@ -3,9 +3,9 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>N</b>cms</span>
+      <span class="logo-mini"><b>Big</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Neo</b>CMS</span>
+      <span class="logo-lg"><b>Big</b>Pang</span>
     </a>
 
     <!-- Header Navbar -->
@@ -119,12 +119,12 @@
               <!-- The user image in the navbar-->
               {{--<img src="/imgs/avatar/u1.jpg" class="user-image" alt="User Image">--}}
              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{auth()->user()->username}}</span>
+              <span class="hidden-xs">{{auth()->user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="/imgs/log_qrcode.png" class="img-circle" alt="User Image">
+                <img src="/123.png" class="img-circle" alt="User Image">
                 <p>
                   {{auth()->user()->username}} - 系统管理员
                   <small>最后登录:{{date('Y-m-d H:i',strtotime(auth()->user()->updated_at))}}</small>
