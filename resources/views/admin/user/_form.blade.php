@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="tag" class="col-md-3 control-label">用户名</label>
     <div class="col-md-5">
-        <input type="text" class="form-control" name="username" id="tag" value="{{ $username }}" autofocus>
+        <input type="text" class="form-control" name="name" id="tag" value="{{ $name }}" autofocus>
     </div>
 </div>
 <div class="form-group">
