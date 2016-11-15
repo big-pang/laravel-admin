@@ -38,7 +38,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest:admin', ['except' => 'logout']);
-        $this->username = config('admin.global.username');
     }
     /**
      * 重写登录视图页面

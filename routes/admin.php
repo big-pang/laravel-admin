@@ -24,7 +24,7 @@ Route::get('index', ['as' => 'admin.index', 'uses' => function () {
 }]);
 
 
-$router->group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () {
+Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () {
 
     //权限管理路由
     Route::get('permission/{cid}/create', ['as' => 'admin.permission.create', 'uses' => 'PermissionController@create']);
