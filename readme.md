@@ -27,7 +27,7 @@
 - 执行 `php artisan key:generate`
 - 执行 `php artisan migrate`
 - 执行 `php artisan db:seed --class=AdminInitSeeder`
-- 键入 '域名/admin'
+- 键入 '域名/admin/login'(后台登录)
 - 默认后台账号:root@admin.com 密码:root
 
 
