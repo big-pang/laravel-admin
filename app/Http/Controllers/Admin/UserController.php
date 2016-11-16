@@ -94,7 +94,7 @@ class UserController extends Controller
         if (is_array($request->get('roles'))) {
             $user->giveRoleTo($request->get('roles'));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,1,'添加了用户'.$user->name));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 1, '添加了用户' . $user->name));
         return redirect('/admin/user')->withSuccess('添加成功！');
     }
 
@@ -131,7 +131,7 @@ class UserController extends Controller
         }
         $data['rolesAll'] = Role::all()->toArray();
         $data['id'] = (int)$id;
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser',$user->id,3,'编辑了用户'.$user->name));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 3, '编辑了用户' . $user->name));
         return view('admin.user.edit', $data);
     }
 
@@ -158,8 +158,8 @@ class UserController extends Controller
         }
 
         unset($user->roles);
-        
-        $user->giveRoleTo($request->get('roles',[]));
+
+        $user->giveRoleTo($request->get('roles', []));
 
         return redirect('/admin/user')->withSuccess('添加成功！');
     }
@@ -173,6 +173,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $tag = User::find((int)$id);
+        foreach ($tag->roles as $v) {
+            $tag->roles()->detach($v);
+        }
         if ($tag && $tag->id != 1) {
             $tag->delete();
         } else {

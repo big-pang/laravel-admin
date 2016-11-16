@@ -26,7 +26,7 @@ class AdminUser extends Authenticatable
     //用户角色
     public function roles()
     {
-        return $this->belongsToMany(Role::class,'admin_role_user','role_id','user_id');
+        return $this->belongsToMany(Role::class,'admin_role_user','user_id','role_id');
     }
 
     // 判断用户是否具有某个角色

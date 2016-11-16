@@ -5,13 +5,6 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="tag" class="col-md-3 control-label">角色名称</label>
-    <div class="col-md-5">
-        <input type="text" class="form-control" name="label" id="tag" value="{{ $label }}" autofocus>
-    </div>
-</div>
-
-<div class="form-group">
     <label for="tag" class="col-md-3 control-label">角色概述</label>
     <div class="col-md-5">
         <textarea name="description" class="form-control" rows="3">{{ $description }}</textarea>

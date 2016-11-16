@@ -24,7 +24,7 @@ class RoleCreateRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required|unique:roles|max:255',
+            'name'=>'required|unique:admin_roles|max:255',
         ];
     }
 }

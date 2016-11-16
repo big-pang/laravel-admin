@@ -71,7 +71,7 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        确认要删除这个软件吗?
+                        确认要删除这个权限吗?
                     </p>
                 </div>
                 <div class="modal-footer">

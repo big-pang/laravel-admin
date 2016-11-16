@@ -63,7 +63,7 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        确认要删除这个角色吗?
+                        确认要删除这个用户吗?
                     </p>
                 </div>
                 <div class="modal-footer">

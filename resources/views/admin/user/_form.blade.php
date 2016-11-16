@@ -42,7 +42,7 @@
                            @endif
                            id="inputChekbox{{$v['id']}}" type="Checkbox" value="{{$v['id']}}"
                            name="roles[]"> <label for="inputChekbox{{$v['id']}}">
-                    {{$v['label']}}
+                    {{$v['name']}}
                 </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             </div>

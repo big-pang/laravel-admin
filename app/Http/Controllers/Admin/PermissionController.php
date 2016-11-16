@@ -93,10 +93,9 @@ class PermissionController extends Controller
      */
     public function store(PermissionCreateRequest $request)
     {
-
         $permission = new Permission();
         foreach (array_keys($this->fields) as $field) {
-            $permission->$field = $request->get($field);
+            $permission->$field = $request->get($field,$this->fields[$field]);
         }
         $permission->save();
         Event::fire(new permChangeEvent());
@@ -144,7 +143,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::find((int)$id);
         foreach (array_keys($this->fields) as $field) {
-            $permission->$field = $request->get($field);
+            $permission->$field = $request->get($field,$this->fields[$field]);
         }
         $permission->save();
         Event::fire(new permChangeEvent());
@@ -167,6 +166,9 @@ class PermissionController extends Controller
                 ->withErrors("请先将该权限的子权限删除后再做删除操作!");
         }
         $tag = Permission::find((int)$id);
+        foreach ($tag->roles as $v){
+            $tag->roles()->detach($v->id);
+        }
         if ($tag) {
             $tag->delete();
         } else {

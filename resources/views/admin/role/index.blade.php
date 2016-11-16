@@ -34,8 +34,7 @@
                         <tr>
                             <th data-sortable="false" class="hidden-sm"></th>
                             <th class="hidden-sm">角色名称</th>
-                            <th class="hidden-sm">角色标签</th>
-                            <th class="hidden-sm">角色概述</th>
+                            <th class="hidden-sm">角色描述</th>
                             <th class="hidden-md">角色创建日期</th>
                             <th class="hidden-md">角色修改日期</th>
                             <th data-sortable="false">操作</th>
@@ -118,7 +117,6 @@
                 "columns": [
                     {"data": "id"},
                     {"data": "name"},
-                    {"data": "label"},
                     {"data": "description"},
                     {"data": "created_at"},
                     {"data": "updated_at"},

@@ -17,7 +17,6 @@ class RoleController extends Controller
 {
     protected $fields = [
         'name' => '',
-        'label' => '',
         'description' => '',
         'permissions' => [],
     ];
@@ -173,6 +172,14 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::find((int)$id);
+        foreach ($role->users as $v){
+            $role->users()->detach($v);
+        }
+
+        foreach ($role->permissions as $v){
+            $role->permissions()->detach($v);
+        }
+
         if ($role) {
             $role->delete();
         } else {
