@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class userActionEvent extends Event
 {
     use SerializesModels;
-    public $uid,$model,$aid,$type,$content;
+    public $uid,$adminName,$model,$aid,$type,$content;
 
     /**
      * userActionEvent constructor.
@@ -20,7 +20,8 @@ class userActionEvent extends Event
      */
     public function __construct(string $model, int $aid, int $type, string $content)
     {
-        $this->uid = auth()->user()->id;
+        $this->uid = auth('admin')->user()->id;
+        $this->adminName = auth('admin')->user()->name;
         $this->model = $model;
         $this->aid = $aid;
         $this->type = $type;

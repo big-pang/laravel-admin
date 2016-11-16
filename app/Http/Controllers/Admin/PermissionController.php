@@ -45,11 +45,13 @@ class PermissionController extends Controller
                 $data['recordsFiltered'] = Permission::where('cid', $cid)->where(function ($query) use ($search) {
                     $query
                         ->where('name', 'LIKE', '%' . $search['value'] . '%')
-                        ->orWhere('description', 'like', '%' . $search['value'] . '%');
+                        ->orWhere('description', 'like', '%' . $search['value'] . '%')
+                        ->orWhere('label', 'like', '%' . $search['value'] . '%');
                 })->count();
                 $data['data'] = Permission::where('cid', $cid)->where(function ($query) use ($search) {
                     $query->where('name', 'LIKE', '%' . $search['value'] . '%')
-                        ->orWhere('description', 'like', '%' . $search['value'] . '%');
+                        ->orWhere('description', 'like', '%' . $search['value'] . '%')
+                        ->orWhere('label', 'like', '%' . $search['value'] . '%');
                 })
                     ->skip($start)->take($length)
                     ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
