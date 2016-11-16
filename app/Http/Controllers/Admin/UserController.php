@@ -78,16 +78,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\AdminUserCreateRequest $request)
     {
         $user = new User();
         foreach (array_keys($this->fields) as $field) {
             $user->$field = $request->get($field);
-        }
-        if ($request->get('password') != '' && $request->get('repassword') != '' && $request->get('password') == $request->get('repassword')) {
-            $user->password = bcrypt($request->get('password'));
-        } else {
-            return redirect()->back()->withErrors('密码或确认密码不能为空！');
         }
         unset($user->roles);
         $user->save();
@@ -142,23 +137,14 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\AdminUserUpdateRequest $request, $id)
     {
-
         $user = User::find((int)$id);
         foreach (array_keys($this->fields) as $field) {
             $user->$field = $request->get($field);
         }
-        if ($request->get('password') != '' || $request->get('repassword') != '') {
-            if ($request->get('password') != '' && $request->get('repassword') != '' && $request->get('password') == $request->get('repassword')) {
-                $user->password = bcrypt($request->get('password'));
-            } else {
-                return redirect()->back()->withErrors('修改密码时,密码或确认密码不能为空！');
-            }
-        }
-
         unset($user->roles);
-
+        $user->save();
         $user->giveRoleTo($request->get('roles', []));
 
         return redirect('/admin/user')->withSuccess('添加成功！');

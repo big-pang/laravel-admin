@@ -21,7 +21,7 @@
 <div class="form-group">
     <label for="tag" class="col-md-3 control-label">密码确认</label>
     <div class="col-md-5">
-        <input type="password" class="form-control" name="repassword" id="tag" value="" autofocus>
+        <input type="password" class="form-control" name="password_confirmation" id="tag" value="" autofocus>
     </div>
 </div>
 
