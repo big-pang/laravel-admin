@@ -15,11 +15,11 @@ use Cache, Event;
 class PermissionController extends Controller
 {
     protected $fields = [
-        'name' => '',
-        'label' => '',
+        'name'        => '',
+        'label'       => '',
         'description' => '',
-        'cid' => 0,
-        'icon' => '',
+        'cid'         => 0,
+        'icon'        => '',
     ];
 
 
@@ -63,12 +63,14 @@ class PermissionController extends Controller
                     ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
                     ->get();
             }
+
             return response()->json($data);
         }
         $datas['cid'] = $cid;
         if ($cid > 0) {
             $datas['data'] = Permission::find($cid);
         }
+
         return view('admin.permission.index', $datas);
     }
 
@@ -84,6 +86,7 @@ class PermissionController extends Controller
             $data[$field] = old($field, $default);
         }
         $data['cid'] = $cid;
+
         return view('admin.permission.create', $data);
     }
 
@@ -97,11 +100,12 @@ class PermissionController extends Controller
     {
         $permission = new Permission();
         foreach (array_keys($this->fields) as $field) {
-            $permission->$field = $request->get($field,$this->fields[$field]);
+            $permission->$field = $request->get($field, $this->fields[$field]);
         }
         $permission->save();
         Event::fire(new permChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\Permission', $permission->id, 1, '添加了权限:' . $permission->name . '(' . $permission->label . ')'));
+
         return redirect('/admin/permission/' . $permission->cid)->withSuccess('添加成功！');
     }
 
@@ -130,6 +134,7 @@ class PermissionController extends Controller
         foreach (array_keys($this->fields) as $field) {
             $data[$field] = old($field, $permission->$field);
         }
+
         //dd($data);
         return view('admin.permission.edit', $data);
     }
@@ -145,11 +150,12 @@ class PermissionController extends Controller
     {
         $permission = Permission::find((int)$id);
         foreach (array_keys($this->fields) as $field) {
-            $permission->$field = $request->get($field,$this->fields[$field]);
+            $permission->$field = $request->get($field, $this->fields[$field]);
         }
         $permission->save();
         Event::fire(new permChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\Permission', $permission->id, 3, '修改了权限:' . $permission->name . '(' . $permission->label . ')'));
+
         return redirect('admin/permission/' . $permission->cid)->withSuccess('修改成功！');
     }
 
@@ -168,7 +174,7 @@ class PermissionController extends Controller
                 ->withErrors("请先将该权限的子权限删除后再做删除操作!");
         }
         $tag = Permission::find((int)$id);
-        foreach ($tag->roles as $v){
+        foreach ($tag->roles as $v) {
             $tag->roles()->detach($v->id);
         }
         if ($tag) {
@@ -179,6 +185,7 @@ class PermissionController extends Controller
         }
         Event::fire(new permChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\Permission', $tag->id, 2, '删除了权限:' . $tag->name . '(' . $tag->label . ')'));
+
         return redirect()->back()
             ->withSuccess("删除成功");
     }

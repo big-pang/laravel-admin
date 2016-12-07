@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     protected $fields = [
-        'name' => '',
+        'name'  => '',
         'email' => '',
         'roles' => [],
     ];
@@ -52,8 +52,10 @@ class UserController extends Controller
                     ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
                     ->get();
             }
+
             return response()->json($data);
         }
+
         return view('admin.user.index');
     }
 
@@ -69,6 +71,7 @@ class UserController extends Controller
             $data[$field] = old($field, $default);
         }
         $data['rolesAll'] = Role::all()->toArray();
+
         return view('admin.user.create', $data);
     }
 
@@ -84,12 +87,14 @@ class UserController extends Controller
         foreach (array_keys($this->fields) as $field) {
             $user->$field = $request->get($field);
         }
+        $user->password = bcrypt($request->get('password'));
         unset($user->roles);
         $user->save();
         if (is_array($request->get('roles'))) {
             $user->giveRoleTo($request->get('roles'));
         }
         event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 1, '添加了用户' . $user->name));
+
         return redirect('/admin/user')->withSuccess('添加成功！');
     }
 
@@ -127,6 +132,7 @@ class UserController extends Controller
         $data['rolesAll'] = Role::all()->toArray();
         $data['id'] = (int)$id;
         event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 3, '编辑了用户' . $user->name));
+
         return view('admin.user.edit', $data);
     }
 
@@ -144,6 +150,11 @@ class UserController extends Controller
             $user->$field = $request->get($field);
         }
         unset($user->roles);
+        if ($request->get('password') != '') {
+            $user->password = bcrypt($request->get('password'));
+
+        }
+
         $user->save();
         $user->giveRoleTo($request->get('roles', []));
 
