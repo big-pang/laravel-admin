@@ -97,7 +97,7 @@ class RoleController extends Controller
         // dd($request->get('permission'));
         $role->save();
         if (is_array($request->get('permissions'))) {
-            $role->givePermissionsTo($request->get('permissions'));
+            $role->permissions()->sync($request->get('permissions',[]));
         }
         event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".Auth::user()->username."{".Auth::user()->id."}添加角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('添加成功！');
@@ -158,7 +158,7 @@ class RoleController extends Controller
         unset($role->permissions);
         $role->save();
 
-        $role->givePermissionsTo($request->get('permissions',[]));
+        $role->permissions()->sync($request->get('permissions',[]));
         event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,3,"用户".Auth::user()->username."{".Auth::user()->id."}编辑角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('修改成功！');
     }

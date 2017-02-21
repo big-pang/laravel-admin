@@ -22,14 +22,5 @@ class Role extends Model
         return $this->permissions()->save($permission);
     }
 
-    //角色权限整体添加与修改
-    public function givePermissionsTo(array $permissionId){
-        $this->permissions()->detach();
-        $permissions=Permission::whereIn('id',$permissionId)->get();
-        foreach ($permissions as $v){
-            $this->givePermissionTo($v);
-        }
-        return true;
-    }
 
 }
