@@ -40,7 +40,7 @@ class GetMenu
         //查找出所有的地址
         $table = Cache::store('file')->rememberForever('menus', function () {
             return \App\Models\Admin\Permission::where('name', 'LIKE', '%index')
-                ->orWhere('cid', '==', 0)
+                ->orWhere('cid', '=', 0)
                 ->get();
         });
         foreach ($table as $v) {
