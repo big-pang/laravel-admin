@@ -40,11 +40,11 @@ class GetMenu
         //查找出所有的地址
         $table = Cache::store('file')->rememberForever('menus', function () {
             return \App\Models\Admin\Permission::where('name', 'LIKE', '%index')
-                ->orWhere('cid', '=', 0)
+                ->orWhere('cid', 0)
                 ->get();
         });
         foreach ($table as $v) {
-            if ($v->cid == 0 || \Gate::check($v->name)) {
+            if ($v->cid == 0 || \Gate::forUser(auth('admin')->user())->check($v->name)) {
                 if ($v->name == $urlPath) {
                     $openArr[] = $v->id;
                     $openArr[] = $v->cid;

@@ -127,8 +127,8 @@
                             columnDefs: [
                                 {
                                     'targets': -1, "render": function (data, type, row) {
-                                    var row_edit = {{Gate::check('admin.role.edit') ? 1 : 0}};
-                                    var row_delete = {{Gate::check('admin.role.destroy') ? 1 :0}};
+                                    var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.role.edit') ? 1 : 0}};
+                                    var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.role.destroy') ? 1 :0}};
                                     var str = '';
 
                                     //编辑

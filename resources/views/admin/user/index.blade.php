@@ -130,8 +130,8 @@
                             columnDefs: [
                                 {
                                     'targets': -1, "render": function (data, type, row) {
-                                    var row_edit = {{Gate::check('admin.user.edit') ? 1 : 0}};
-                                    var row_delete = {{Gate::check('admin.user.destroy') ? 1 :0}};
+                                    var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.user.edit') ? 1 : 0}};
+                                    var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.user.destroy') ? 1 :0}};
                                     var str = '';
 
                                     //编辑
