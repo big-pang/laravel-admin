@@ -12,11 +12,11 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6 text-right">
-            @can('admin.user.create')
+            @if(Gate::forUser(auth('admin')->user())->check('admin.user.create'))
                 <a href="/admin/user/create" class="btn btn-success btn-md">
                     <i class="fa fa-plus-circle"></i> 添加用户
                 </a>
-            @endcan
+            @@endif
         </div>
     </div>
     <div class="row page-title-row" style="margin:5px;">
