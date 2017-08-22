@@ -99,7 +99,8 @@ class RoleController extends Controller
         if (is_array($request->get('permissions'))) {
             $role->permissions()->sync($request->get('permissions',[]));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".Auth::user()->username."{".Auth::user()->id."}添加角色".$role->name."{".$role->id."}"));
+        $user = Auth::guard('admin')->user();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".$user->username."{".$user->id."}添加角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('添加成功！');
     }
 
@@ -159,7 +160,8 @@ class RoleController extends Controller
         $role->save();
 
         $role->permissions()->sync($request->get('permissions',[]));
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,3,"用户".Auth::user()->username."{".Auth::user()->id."}编辑角色".$role->name."{".$role->id."}"));
+        $user = Auth::guard('admin')->user();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,3,"用户".$user->username."{".$user->id."}编辑角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('修改成功！');
     }
 
@@ -186,7 +188,8 @@ class RoleController extends Controller
             return redirect()->back()
                 ->withErrors("删除失败");
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"用户".Auth::user()->username."{".Auth::user()->id."}删除角色".$role->name."{".$role->id."}"));
+        $user = Auth::guard('admin')->user();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"用户".$user->username."{".$user->id."}删除角色".$role->name."{".$role->id."}"));
         return redirect()->back()
             ->withSuccess("删除成功");
     }
