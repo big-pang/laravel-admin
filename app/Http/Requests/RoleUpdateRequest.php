@@ -24,7 +24,7 @@ class RoleUpdateRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required|unique:admin_roles,name,'.$this->get('id').'|max:255',
+            'name' => 'required|unique:admin_roles,name,' . $this->get('id') . '|max:255',
         ];
     }
 }

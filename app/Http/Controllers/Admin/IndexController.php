@@ -32,7 +32,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        dd('后台首页，当前用户名：'.auth('admin')->user()->name);
+        dd('后台首页，当前用户名：' . auth('admin')->user()->name);
     }
 
 

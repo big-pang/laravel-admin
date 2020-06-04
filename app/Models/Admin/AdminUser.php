@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Models\Admin;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AdminUser extends Authenticatable
 {
     use Notifiable;
-    protected $table='admin_users';
+
+    protected $table = 'admin_users';
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +28,7 @@ class AdminUser extends Authenticatable
     //用户角色
     public function roles()
     {
-        return $this->belongsToMany(Role::class,'admin_role_user','user_id','role_id');
+        return $this->belongsToMany(Role::class, 'admin_role_user', 'user_id', 'role_id');
     }
 
     // 判断用户是否具有某个角色
@@ -43,7 +45,7 @@ class AdminUser extends Authenticatable
     public function hasPermission($permission)
     {
         if (is_string($permission)) {
-            $permission = Permission::where('name',$permission)->first();
+            $permission = Permission::where('name', $permission)->first();
             if (!$permission) return false;
         }
 
@@ -58,12 +60,14 @@ class AdminUser extends Authenticatable
 
 
     //角色整体添加与修改
-    public function giveRoleTo(array $RoleId){
+    public function giveRoleTo(array $RoleId)
+    {
         $this->roles()->detach();
-        $roles=Role::whereIn('id',$RoleId)->get();
-        foreach ($roles as $v){
+        $roles = Role::whereIn('id', $RoleId)->get();
+        foreach ($roles as $v) {
             $this->assignRole($v);
         }
+
         return true;
     }
 }

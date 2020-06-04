@@ -10,14 +10,15 @@ class GetMenu
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         //view()->share('comData',$this->getMenu());
         $request->attributes->set('comData_menu', $this->getMenu());
+
         return $next($request);
     }
 
@@ -60,6 +61,7 @@ class GetMenu
         unset($data[0]);
         //ation open 可以在函数中计算给他
         $data['openarr'] = array_unique($openArr);
+
         return $data;
 
     }

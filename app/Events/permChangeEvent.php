@@ -15,9 +15,9 @@ class permChangeEvent extends Event
      *
      * @return void
      */
-    public function __construct($permChange=[])
+    public function __construct($permChange = [])
     {
-        $this->permChange=$permChange;
+        $this->permChange = $permChange;
     }
 
     /**

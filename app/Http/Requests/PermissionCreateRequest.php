@@ -24,9 +24,9 @@ class PermissionCreateRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required|unique:admin_permissions|max:255',
-            'label'=>'required|max:255',
-            'cid'=>'required|int',
+            'name'  => 'required|unique:admin_permissions|max:255',
+            'label' => 'required|max:255',
+            'cid'   => 'required|int',
         ];
     }
 }

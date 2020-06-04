@@ -24,9 +24,9 @@ class PermissionUpdateRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required|unique:admin_permissions,name,'.$this->get('id').'|max:255',
-            'label'=>'unique:admin_permissions,label,'.$this->get('id').'|max:255',
-            'cid'=>'int',
+            'name'  => 'required|unique:admin_permissions,name,' . $this->get('id') . '|max:255',
+            'label' => 'unique:admin_permissions,label,' . $this->get('id') . '|max:255',
+            'cid'   => 'int',
         ];
     }
 }

@@ -24,9 +24,9 @@ class AdminUserCreateRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required|unique:admin_users|max:255',
-            'email'=>'required|unique:admin_users|email|max:255',
-            'password'=>'required|confirmed|min:6|max:50'
+            'name'     => 'required|unique:admin_users|max:255',
+            'email'    => 'required|unique:admin_users|email|max:255',
+            'password' => 'required|confirmed|min:6|max:50',
         ];
     }
 }

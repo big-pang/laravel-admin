@@ -16,7 +16,7 @@ use Auth;
 class RoleController extends Controller
 {
     protected $fields = [
-        'name' => '',
+        'name'        => '',
         'description' => '',
         'permissions' => [],
     ];
@@ -30,7 +30,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = array();
+            $data = [];
             $data['draw'] = $request->get('draw');
             $start = $request->get('start');
             $length = $request->get('length');
@@ -57,8 +57,10 @@ class RoleController extends Controller
                     ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
                     ->get();
             }
+
             return response()->json($data);
         }
+
         return view('admin.role.index');
     }
 
@@ -77,6 +79,7 @@ class RoleController extends Controller
         foreach ($arr as $v) {
             $data['permissionAll'][$v['cid']][] = $v;
         }
+
         return view('admin.role.create', $data);
     }
 
@@ -97,16 +100,17 @@ class RoleController extends Controller
         // dd($request->get('permission'));
         $role->save();
         if (is_array($request->get('permissions'))) {
-            $role->permissions()->sync($request->get('permissions',[]));
+            $role->permissions()->sync($request->get('permissions', []));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}添加角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role', $role->id, 1, "用户" . auth('admin')->user()->username . "{" . auth('admin')->user()->id . "}添加角色" . $role->name . "{" . $role->id . "}"));
+
         return redirect('/admin/role')->withSuccess('添加成功！');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -117,7 +121,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -139,6 +143,7 @@ class RoleController extends Controller
             $data['permissionAll'][$v['cid']][] = $v;
         }
         $data['id'] = (int)$id;
+
         return view('admin.role.edit', $data);
     }
 
@@ -146,7 +151,7 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param PermissionUpdateRequest|Request $request
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(RoleUpdateRequest $request, $id)
@@ -158,25 +163,26 @@ class RoleController extends Controller
         unset($role->permissions);
         $role->save();
 
-        $role->permissions()->sync($request->get('permissions',[]));
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,3,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}编辑角色".$role->name."{".$role->id."}"));
+        $role->permissions()->sync($request->get('permissions', []));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role', $role->id, 3, "用户" . auth('admin')->user()->username . "{" . auth('admin')->user()->id . "}编辑角色" . $role->name . "{" . $role->id . "}"));
+
         return redirect('/admin/role')->withSuccess('修改成功！');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $role = Role::find((int)$id);
-        foreach ($role->users as $v){
+        foreach ($role->users as $v) {
             $role->users()->detach($v);
         }
 
-        foreach ($role->permissions as $v){
+        foreach ($role->permissions as $v) {
             $role->permissions()->detach($v);
         }
 
@@ -186,7 +192,8 @@ class RoleController extends Controller
             return redirect()->back()
                 ->withErrors("删除失败");
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}删除角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role', $role->id, 2, "用户" . auth('admin')->user()->username . "{" . auth('admin')->user()->id . "}删除角色" . $role->name . "{" . $role->id . "}"));
+
         return redirect()->back()
             ->withSuccess("删除成功");
     }

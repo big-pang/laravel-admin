@@ -6,6 +6,7 @@ use App\Events\permChangeEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Cache;
+
 class permChangeListener
 {
     /**
@@ -21,7 +22,7 @@ class permChangeListener
     /**
      * Handle the event.
      *
-     * @param  permChangeEvent $event
+     * @param permChangeEvent $event
      * @return void
      */
     public function handle(permChangeEvent $event)

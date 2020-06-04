@@ -38,21 +38,23 @@ class LoginController extends Controller
     {
         $this->middleware('guest:admin', ['except' => 'logout']);
     }
+
     /**
      * 重写登录视图页面
+     * @return [type]                   [description]
      * @author 晚黎
      * @date   2016-09-05T23:06:16+0800
-     * @return [type]                   [description]
      */
     public function showLoginForm()
     {
         return view('admin.auth.login');
     }
+
     /**
      * 自定义认证驱动
+     * @return [type]                   [description]
      * @author 晚黎
      * @date   2016-09-05T23:53:07+0800
-     * @return [type]                   [description]
      */
     protected function guard()
     {
@@ -62,7 +64,7 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout()
