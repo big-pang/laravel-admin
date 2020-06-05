@@ -11,11 +11,11 @@
 
 ## 截图
 
-## ![laravel rbac](http://o7ze7op4t.bkt.clouddn.com/QQ20161111-1.png)
+## ![laravel rbac](https://gitee.com/Big_Pang/laravel5.3-admin/raw/master/public/login.jpg)
 
 
 
-![rbac](http://o7ze7op4t.bkt.clouddn.com/QQ20161111-2.png)
+![rbac](https://gitee.com/Big_Pang/laravel5.3-admin/raw/master/public/img1.jpg)
 
 
 
